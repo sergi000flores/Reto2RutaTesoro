@@ -21,9 +21,8 @@
 
 El objetivo principal de **Reto2RutaTesoro** es simular o resolver un desafío donde un agente o jugador debe navegar a través de un mapa/matriz para encontrar la ruta óptima hacia un tesoro, superando obstáculos y optimizando los pasos o recursos utilizados.
 
-Este tipo de retos suele evaluar:
-- **Algoritmos de búsqueda** (BFS, DFS, A*, Dijkstra, etc.).
-- **Manejo de estructuras de datos** (matrices, grafos, colas, pilas).
+Este tipo de retos suele evaluar
+- **Manejo de estructuras de datos** (lista simple enlazada).
 - **Lógica de programación y diseño limpio de código**.
 
 ---
@@ -39,8 +38,8 @@ Este tipo de retos suele evaluar:
 
 ## 🛠️ Tecnologías Utilizadas
 
-- **Lenguaje Principal:** *(Por ejemplo: Java / Python / C++ / JavaScript)*
-- **Entorno de Desarrollo:** Visual Studio Code / IntelliJ IDEA / Eclipse
+- **Lenguaje Principal:** *(c#)*
+- **Entorno de Desarrollo:** Visual Studio 
 - **Control de Versiones:** Git & GitHub
 
 ---
@@ -80,19 +79,7 @@ cd Reto2RutaTesoro
 
 ---
 
-## 💻 Uso y Ejecución
 
-1. **Compilar / Preparar el entorno:**
-   *(Añade el comando específico si utilizas un gestor de paquetes como Maven, Gradle, npm o entorno virtual de Python)*
-
-2. **Ejecutar la aplicación:**
-   ```bash
-   # Ejemplo para Python:
-   python main.py
-
-   # Ejemplo para Java:
-   javac Main.java && java Main
-   ```
 
 3. **Entrada de Datos / Pruebas:**
    - Define el mapa de entrada o configura las coordenadas de origen y destino en el archivo correspondiente.
@@ -115,6 +102,3 @@ cd Reto2RutaTesoro
 
 ---
 
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia MIT. Consulta el archivo `LICENSE` para obtener más información.
