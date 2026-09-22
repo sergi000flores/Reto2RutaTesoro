@@ -1,9 +1,9 @@
-﻿namespace Reto2RutaTesoro
+﻿namespace TreasureRoute
 {
-  partial class FrmRutaTesoro
+  partial class TreasureRouteForm                   
   {
     /// <summary>
-    /// Variable necesaria del diseñador.
+    /// Designer required variable.
     /// </summary>
     private System.ComponentModel.IContainer components = null;
 
@@ -79,7 +79,7 @@
       this.lblTitulo.Name = "lblTitulo";
       this.lblTitulo.Size = new System.Drawing.Size(300, 30);
       this.lblTitulo.TabIndex = 0;
-      this.lblTitulo.Text = "🗺️ La Ruta del Tesoro Perdido";
+      this.lblTitulo.Text = "🗺️ The Lost Treasure Route";
       //
       // lblSubtitulo
       //
@@ -90,7 +90,7 @@
       this.lblSubtitulo.Name = "lblSubtitulo";
       this.lblSubtitulo.Size = new System.Drawing.Size(260, 15);
       this.lblSubtitulo.TabIndex = 1;
-      this.lblSubtitulo.Text = "Lista simplemente enlazada construida desde cero";
+      this.lblSubtitulo.Text = "Singly linked list built from scratch";
       //
       // pnlEntrada
       //
@@ -123,7 +123,7 @@
       this.lblId.Name = "lblId";
       this.lblId.Size = new System.Drawing.Size(84, 15);
       this.lblId.TabIndex = 0;
-      this.lblId.Text = "ID Ubicación:";
+      this.lblId.Text = "Location ID:";
       //
       // nudId
       //
@@ -143,7 +143,7 @@
       this.lblNombre.Name = "lblNombre";
       this.lblNombre.Size = new System.Drawing.Size(112, 15);
       this.lblNombre.TabIndex = 2;
-      this.lblNombre.Text = "Nombre del lugar:";
+      this.lblNombre.Text = "Location Name:";
       //
       // txtNombre
       //
@@ -160,7 +160,7 @@
       this.lblPista.Name = "lblPista";
       this.lblPista.Size = new System.Drawing.Size(37, 15);
       this.lblPista.TabIndex = 4;
-      this.lblPista.Text = "Pista:";
+      this.lblPista.Text = "Hint:";
       //
       // txtPista
       //
@@ -177,7 +177,7 @@
       this.lblPeligro.Name = "lblPeligro";
       this.lblPeligro.Size = new System.Drawing.Size(107, 15);
       this.lblPeligro.TabIndex = 6;
-      this.lblPeligro.Text = "Peligro (1-10):";
+      this.lblPeligro.Text = "Danger (1-10):";
       //
       // nudPeligro
       //
@@ -198,9 +198,9 @@
       this.btnAgregar.Name = "btnAgregar";
       this.btnAgregar.Size = new System.Drawing.Size(140, 32);
       this.btnAgregar.TabIndex = 8;
-      this.btnAgregar.Text = "➕ Agregar";
+      this.btnAgregar.Text = "➕ Add";
       this.btnAgregar.UseVisualStyleBackColor = false;
-      this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+      this.btnAgregar.Click += new System.EventHandler(this.btnAdd_Click);
       //
       // btnBuscar
       //
@@ -211,9 +211,9 @@
       this.btnBuscar.Name = "btnBuscar";
       this.btnBuscar.Size = new System.Drawing.Size(140, 32);
       this.btnBuscar.TabIndex = 9;
-      this.btnBuscar.Text = "🔍 Buscar";
+      this.btnBuscar.Text = "🔍 Search";
       this.btnBuscar.UseVisualStyleBackColor = false;
-      this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+      this.btnBuscar.Click += new System.EventHandler(this.btnSearch_Click);
       //
       // btnModificar
       //
@@ -224,9 +224,9 @@
       this.btnModificar.Name = "btnModificar";
       this.btnModificar.Size = new System.Drawing.Size(140, 32);
       this.btnModificar.TabIndex = 10;
-      this.btnModificar.Text = "✏️ Modificar";
+      this.btnModificar.Text = "✏️ Modify";
       this.btnModificar.UseVisualStyleBackColor = false;
-      this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+      this.btnModificar.Click += new System.EventHandler(this.btnModify_Click);
       //
       // btnEliminar
       //
@@ -237,9 +237,9 @@
       this.btnEliminar.Name = "btnEliminar";
       this.btnEliminar.Size = new System.Drawing.Size(140, 32);
       this.btnEliminar.TabIndex = 11;
-      this.btnEliminar.Text = "🗑️ Eliminar";
+      this.btnEliminar.Text = "🗑️ Delete";
       this.btnEliminar.UseVisualStyleBackColor = false;
-      this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+      this.btnEliminar.Click += new System.EventHandler(this.btnDelete_Click);
       //
       // btnLimpiar
       //
@@ -250,9 +250,9 @@
       this.btnLimpiar.Name = "btnLimpiar";
       this.btnLimpiar.Size = new System.Drawing.Size(140, 32);
       this.btnLimpiar.TabIndex = 12;
-      this.btnLimpiar.Text = "🧹 Limpiar";
+      this.btnLimpiar.Text = "🧹 Clear";
       this.btnLimpiar.UseVisualStyleBackColor = false;
-      this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+      this.btnLimpiar.Click += new System.EventHandler(this.btnClear_Click);
       //
       // dgvRuta
       //
@@ -276,7 +276,7 @@
       this.dgvRuta.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.dgvRuta.Size = new System.Drawing.Size(940, 315);
       this.dgvRuta.TabIndex = 2;
-      this.dgvRuta.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRuta_CellClick);
+      this.dgvRuta.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRoute_CellClick);
       //
       // colId
       //
@@ -287,7 +287,7 @@
       //
       // colNombre
       //
-      this.colNombre.HeaderText = "Ubicación";
+      this.colNombre.HeaderText = "Location";
       this.colNombre.Name = "colNombre";
       this.colNombre.ReadOnly = true;
       this.colNombre.Width = 220;
@@ -295,13 +295,13 @@
       // colPista
       //
       this.colPista.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-      this.colPista.HeaderText = "Pista";
+      this.colPista.HeaderText = "Hint";
       this.colPista.Name = "colPista";
       this.colPista.ReadOnly = true;
       //
       // colPeligro
       //
-      this.colPeligro.HeaderText = "Peligro";
+      this.colPeligro.HeaderText = "Danger";
       this.colPeligro.Name = "colPeligro";
       this.colPeligro.ReadOnly = true;
       this.colPeligro.Width = 80;
@@ -324,7 +324,7 @@
       this.lblContador.Name = "lblContador";
       this.lblContador.Size = new System.Drawing.Size(140, 15);
       this.lblContador.TabIndex = 0;
-      this.lblContador.Text = "Nodos en la ruta: 0";
+      this.lblContador.Text = "Nodes in route: 0";
       //
       // FrmRutaTesoro
       //
@@ -338,7 +338,7 @@
       this.MinimumSize = new System.Drawing.Size(880, 500);
       this.Name = "FrmRutaTesoro";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-      this.Text = "Reto 2 - La Ruta del Tesoro Perdido";
+      this.Text = "Challenge 2 - The Lost Treasure Route";
       this.pnlTitulo.ResumeLayout(false);
       this.pnlTitulo.PerformLayout();
       this.pnlEntrada.ResumeLayout(false);

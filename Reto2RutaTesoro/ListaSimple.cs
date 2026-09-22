@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 
-namespace Reto2RutaTesoro
+namespace TreasureRoute
 {
-  /// <summary>
-  /// Lista simplemente enlazada construida completamente desde cero.
-  /// No utiliza List&lt;T&gt;, LinkedList&lt;T&gt;, arreglos ni ninguna colección del framework
-  /// como mecanismo de almacenamiento; toda la información vive únicamente en los objetos Nodo.
-  /// </summary>
+    /// <summary>
+    /// Singly linked list implemented from scratch.
+    /// It does not use List&lt;T&gt;, LinkedList&lt;T&gt;, arrays or any framework
+    /// collections as storage mechanism; all data lives only in Nodo objects.
+    /// </summary>
   internal class ListaSimple
   {
     public Nodo? Inicio { get; set; }

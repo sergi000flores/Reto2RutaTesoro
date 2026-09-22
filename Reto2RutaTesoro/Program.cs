@@ -1,18 +1,18 @@
 using System;
 using System.Windows.Forms;
 
-namespace Reto2RutaTesoro
+namespace TreasureRoute
 {
   internal static class Program
   {
     /// <summary>
-    /// Punto de entrada principal de la aplicación.
+    /// Main entry point of the application.
     /// </summary>
     [STAThread]
     static void Main()
     {
       ApplicationConfiguration.Initialize();
-      Application.Run(new FrmRutaTesoro());
+      Application.Run(new TreasureRouteForm());
     }
   }
 }

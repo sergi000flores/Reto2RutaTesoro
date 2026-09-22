@@ -1,42 +1,42 @@
 using System;
 using System.Windows.Forms;
 
-namespace Reto2RutaTesoro
+namespace TreasureRoute
 {
-  public partial class FrmRutaTesoro : Form
+  public partial class TreasureRouteForm : Form
   {
-    // Única instancia de la estructura de datos. Toda la información real
-    // de la ruta del tesoro vive aquí, nunca en los controles del formulario.
+    // Single instance of the data structure. All real route data
+    // lives here, never in the form controls.
     private readonly ListaSimple _ruta;
 
-    // Id actualmente seleccionado en el DataGridView (null si no hay selección).
+    // Currently selected Id in the DataGridView (null if none).
     private int? _idSeleccionado;
 
-    public FrmRutaTesoro()
+    public TreasureRouteForm()
     {
       InitializeComponent();
       _ruta = new ListaSimple();
-      CargarDatosDemo();
-      ActualizarGrid();
+      LoadSampleData();
+      UpdateGrid();
     }
 
     /// <summary>
-    /// Carga algunas ubicaciones de ejemplo para que el reto se pueda probar de inmediato.
+    /// Loads some sample locations so the challenge can be tried immediately.
     /// </summary>
-    private void CargarDatosDemo()
+    private void LoadSampleData()
     {
-      _ruta.Insertar(new Nodo(1, "Playa del Naufragio", "Donde el sol besa la arena rota", 5, null));
-      _ruta.Insertar(new Nodo(2, "Cueva del Kraken", "Escucha el eco antes de entrar", 9, null));
-      _ruta.Insertar(new Nodo(3, "Isla Calavera", "Dos ojos vacíos miran al norte", 7, null));
-      _ruta.Insertar(new Nodo(4, "Templo Perdido", "El oro duerme bajo la última piedra", 8, null));
+      _ruta.Insertar(new Nodo(1, "Shipwreck Beach", "Where the sun kisses the broken sand", 5, null));
+      _ruta.Insertar(new Nodo(2, "Kraken Cave", "Listen for the echo before entering", 9, null));
+      _ruta.Insertar(new Nodo(3, "Skull Island", "Two empty eyes gaze to the north", 7, null));
+      _ruta.Insertar(new Nodo(4, "Lost Temple", "Gold sleeps beneath the last stone", 8, null));
     }
 
     // --------------------------------------------------------------
     // Botón Agregar -> ListaSimple.Insertar(id) -> Actualizar DataGridView
     // --------------------------------------------------------------
-    private void btnAgregar_Click(object sender, EventArgs e)
+    private void btnAdd_Click(object sender, EventArgs e)
     {
-      if (!ValidarEntrada(out int id, out string nombre, out string pista, out int peligro))
+      if (!ValidateInput(out int id, out string nombre, out string pista, out int peligro))
       {
         return;
       }
@@ -46,28 +46,28 @@ namespace Reto2RutaTesoro
 
       if (!agregado)
       {
-        MessageBox.Show($"Ya existe una ubicación con el ID {id}. Usa otro ID o modifica la existente.",
-          "ID duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        MessageBox.Show($"A location with ID {id} already exists. Use another ID or modify the existing one.",
+          "Duplicate ID", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         return;
       }
 
-      ActualizarGrid();
-      LimpiarCampos();
-      MessageBox.Show("Ubicación agregada a la ruta del tesoro.", "Éxito",
+      UpdateGrid();
+      ClearFields();
+      MessageBox.Show("Location added to the treasure route.", "Success",
         MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 
     // --------------------------------------------------------------
     // Botón Buscar -> ListaSimple.Buscar(id) -> Mostrar resultado
     // --------------------------------------------------------------
-    private void btnBuscar_Click(object sender, EventArgs e)
+    private void btnSearch_Click(object sender, EventArgs e)
     {
       int id = (int)nudId.Value;
       Nodo? nodo = _ruta.Buscar(id);
 
       if (nodo == null)
       {
-        MessageBox.Show($"No existe ninguna ubicación con el ID {id}.", "No encontrado",
+        MessageBox.Show($"No location with ID {id} exists.", "Not found",
           MessageBoxButtons.OK, MessageBoxIcon.Warning);
         return;
       }
@@ -77,16 +77,16 @@ namespace Reto2RutaTesoro
       nudPeligro.Value = nodo.NivelPeligro;
       _idSeleccionado = nodo.Id;
 
-      MessageBox.Show(nodo.ToString(), "Ubicación encontrada",
+      MessageBox.Show(nodo.ToString(), "Location found",
         MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 
     // --------------------------------------------------------------
     // Botón Modificar -> ListaSimple.Modificar(id) -> Actualizar DataGridView
     // --------------------------------------------------------------
-    private void btnModificar_Click(object sender, EventArgs e)
+    private void btnModify_Click(object sender, EventArgs e)
     {
-      if (!ValidarEntrada(out int id, out string nombre, out string pista, out int peligro))
+      if (!ValidateInput(out int id, out string nombre, out string pista, out int peligro))
       {
         return;
       }
@@ -95,27 +95,27 @@ namespace Reto2RutaTesoro
 
       if (!modificado)
       {
-        MessageBox.Show($"No existe ninguna ubicación con el ID {id} para modificar.",
-          "No encontrado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        MessageBox.Show($"No location with ID {id} exists to modify.",
+          "Not found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         return;
       }
 
-      ActualizarGrid();
-      LimpiarCampos();
-      MessageBox.Show("Ubicación modificada correctamente.", "Éxito",
+      UpdateGrid();
+      ClearFields();
+      MessageBox.Show("Location successfully modified.", "Success",
         MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 
     // --------------------------------------------------------------
     // Botón Eliminar -> ListaSimple.Eliminar(id) -> Actualizar DataGridView
     // --------------------------------------------------------------
-    private void btnEliminar_Click(object sender, EventArgs e)
+    private void btnDelete_Click(object sender, EventArgs e)
     {
       int id = (int)nudId.Value;
 
       DialogResult confirmacion = MessageBox.Show(
-        $"¿Seguro que deseas eliminar la ubicación con ID {id} de la ruta?",
-        "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+        $"Are you sure you want to delete the location with ID {id} from the route?",
+        "Confirm deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
       if (confirmacion != DialogResult.Yes)
       {
@@ -126,29 +126,29 @@ namespace Reto2RutaTesoro
 
       if (!eliminado)
       {
-        MessageBox.Show($"No existe ninguna ubicación con el ID {id} para eliminar.",
-          "No encontrado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        MessageBox.Show($"No location with ID {id} exists to delete.",
+          "Not found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         return;
       }
 
-      ActualizarGrid();
-      LimpiarCampos();
-      MessageBox.Show("Ubicación eliminada de la ruta.", "Éxito",
+      UpdateGrid();
+      ClearFields();
+      MessageBox.Show("Location removed from the route.", "Success",
         MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 
     // --------------------------------------------------------------
     // Botón Limpiar -> Solo limpia los campos de captura (no la lista)
     // --------------------------------------------------------------
-    private void btnLimpiar_Click(object sender, EventArgs e)
+    private void btnClear_Click(object sender, EventArgs e)
     {
-      LimpiarCampos();
+      ClearFields();
     }
 
     // --------------------------------------------------------------
     // Selección de fila en el DataGridView -> carga los datos en los campos
     // --------------------------------------------------------------
-    private void dgvRuta_CellClick(object sender, DataGridViewCellEventArgs e)
+    private void dgvRoute_CellClick(object sender, DataGridViewCellEventArgs e)
     {
       if (e.RowIndex < 0)
       {
@@ -179,7 +179,7 @@ namespace Reto2RutaTesoro
     /// Recorre la lista enlazada desde Inicio hasta NULL y redibuja el DataGridView.
     /// El grid es solo una vista; jamás se usa como almacenamiento.
     /// </summary>
-    private void ActualizarGrid()
+    private void UpdateGrid()
     {
       dgvRuta.Rows.Clear();
 
@@ -188,10 +188,10 @@ namespace Reto2RutaTesoro
         dgvRuta.Rows.Add(nodo.Id, nodo.Nombre, nodo.Pista, nodo.NivelPeligro);
       }
 
-      lblContador.Text = $"Nodos en la ruta: {_ruta.Contar()}";
+      lblContador.Text = $"Nodes in route: {_ruta.Contar()}";
     }
 
-    private void LimpiarCampos()
+    private void ClearFields()
     {
       nudId.Value = nudId.Minimum;
       txtNombre.Clear();
@@ -204,7 +204,7 @@ namespace Reto2RutaTesoro
     /// <summary>
     /// Valida los campos capturados en el formulario antes de enviarlos a ListaSimple.
     /// </summary>
-    private bool ValidarEntrada(out int id, out string nombre, out string pista, out int peligro)
+    private bool ValidateInput(out int id, out string nombre, out string pista, out int peligro)
     {
       id = (int)nudId.Value;
       nombre = txtNombre.Text.Trim();
@@ -213,7 +213,7 @@ namespace Reto2RutaTesoro
 
       if (string.IsNullOrWhiteSpace(nombre))
       {
-        MessageBox.Show("El nombre de la ubicación es obligatorio.", "Datos incompletos",
+        MessageBox.Show("Location name is required.", "Incomplete data",
           MessageBoxButtons.OK, MessageBoxIcon.Warning);
         txtNombre.Focus();
         return false;
@@ -221,7 +221,7 @@ namespace Reto2RutaTesoro
 
       if (string.IsNullOrWhiteSpace(pista))
       {
-        MessageBox.Show("La pista de la ubicación es obligatoria.", "Datos incompletos",
+        MessageBox.Show("Location hint is required.", "Incomplete data",
           MessageBoxButtons.OK, MessageBoxIcon.Warning);
         txtPista.Focus();
         return false;
@@ -229,7 +229,7 @@ namespace Reto2RutaTesoro
 
       if (peligro < 1 || peligro > 10)
       {
-        MessageBox.Show("El nivel de peligro debe estar entre 1 y 10.", "Datos incompletos",
+        MessageBox.Show("Danger level must be between 1 and 10.", "Incomplete data",
           MessageBoxButtons.OK, MessageBoxIcon.Warning);
         nudPeligro.Focus();
         return false;

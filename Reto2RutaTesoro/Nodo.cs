@@ -1,11 +1,11 @@
 using System;
 
-namespace Reto2RutaTesoro
+namespace TreasureRoute
 {
-  /// <summary>
-  /// Representa una ubicación del mapa dentro de la ruta del tesoro.
-  /// Cada nodo conoce únicamente al siguiente nodo de la ruta (lista simplemente enlazada).
-  /// </summary>
+    /// <summary>
+    /// Represents a map location within the treasure route.
+    /// Each node only knows the next node in the route (singly linked list).
+    /// </summary>
   internal class Nodo
   {
     public int Id { get; set; }
